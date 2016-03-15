@@ -1,2 +1,5 @@
 # arduino-projects
-README file contains link to youtube video
+
+Ardunio Dice For Monopoly 
+- file: MonoplyDice.ino
+- link to youtube video: https://youtu.be/Bk7w7Jx-nio
