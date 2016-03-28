@@ -4,9 +4,9 @@
 LiquidCrystal lcd(8, 9, 5, 4, 3, 2);
 const int switchPin = 6;
 const int setPlayerPin = 7;
-const int redLEDPin = 10;    // LED connected to digital pin 9
-const int greenLEDPin = 11;     // LED connected to digital pin 10
-const int blueLEDPin = 12;    // LED connected to digital pin 11
+const int redLEDPin = 10;    // LED connected to digital pin 10
+const int greenLEDPin = 11;     // LED connected to digital pin 11
+const int blueLEDPin = 12;    // LED connected to digital pin 12
 
 // Initialize the States
 int switchState = 0;
@@ -20,23 +20,25 @@ int doubleState = 0;
 int num1,num2;
 int playerLed = 0;
 int numOfPlayer = 3;
-unsigned long previousTime = 0;
 int redValue = 0; // value to write to the red LED
 int greenValue = 0; // value to write to the green LED
 int blueValue = 0; // value to write to the blue LED
+unsigned long previousTime = 0;
 
 // Helper methods
 void scrollScreen();
 void playerColor(int choice);
 
 void setup() {
+  // set the digital pins as inputs
+  pinMode(switchPin, INPUT);
+  pinMode(setPlayerPin, INPUT);
   // set the digital pins as outputs
   pinMode(redLEDPin, OUTPUT);
   pinMode(greenLEDPin, OUTPUT);
   pinMode(blueLEDPin, OUTPUT);
-  lcd.begin(16, 2); // Screen Size
-  pinMode(switchPin, INPUT);
-  pinMode(setPlayerPin, INPUT);
+  // Screen Size
+  lcd.begin(16, 2); 
   //-------- Write characters on the display ------------------
   // NOTE: Cursor Position: (CHAR, LINE) start at 0  
   lcd.print("Hello, world!");
@@ -93,14 +95,11 @@ void loop() {
         doubleState = 0;
         prevDoubleState = 0;
         delay(500);
-      }
-      else
-      {
+      } else {
         if(doubleState == prevDoubleState)
           doubleState += 1;
         
-        if(doubleState == 2) // Doubles three times
-        {
+        if(doubleState == 2){ // Doubles three times
           lcd.setCursor(0, 0);
           lcd.print("Double x2");
           lcd.setCursor(0, 1);
@@ -109,9 +108,7 @@ void loop() {
           scrollScreen();
           doubleState = 0;
           prevDoubleState = 0;
-        }
-        else
-        {
+        } else {
           lcd.setCursor(0, 0);
           lcd.print("Double!");
           lcd.setCursor(0, 1);
@@ -142,7 +139,7 @@ void loop() {
 }
 
 void scrollScreen(){
-    // scroll 13 positions (string length) to the left
+  // scroll 13 positions (string length) to the left
   // to move it offscreen left:
   for (int positionCounter = 0; positionCounter < 13; positionCounter++) {
     // scroll one position left:
@@ -201,4 +198,3 @@ void playerColor(int choice){
           blueValue = 80;
       }
 }
-
